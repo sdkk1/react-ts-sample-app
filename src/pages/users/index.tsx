@@ -1,11 +1,11 @@
 import UserList from '@/components/pages/users/UserList'
 
 const Users = () => {
-	return (
-		<>
-			<UserList />
-		</>
-	)
+  return (
+    <>
+      <UserList />
+    </>
+  )
 }
 
 export default Users

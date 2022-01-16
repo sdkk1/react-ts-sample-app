@@ -1,11 +1,11 @@
 import Users from '@/pages/users'
 
 const App = () => {
-	return (
-		<>
-			<Users />
-		</>
-	)
+  return (
+    <>
+      <Users />
+    </>
+  )
 }
 
 export default App
