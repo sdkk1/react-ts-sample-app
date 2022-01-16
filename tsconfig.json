@@ -5,6 +5,12 @@
     "compilerOptions": {
         "strict": true,
         "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
         "lib": [
             "dom",
             "es2015"
