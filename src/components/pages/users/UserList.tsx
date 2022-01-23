@@ -6,26 +6,34 @@ import {
   USERS_URL,
   USER_LIST_TABLE_HEADERS
 } from '@/constants/User'
+import { useError } from '@/context/error'
 import { css } from '@emotion/react'
 
 const UserList = () => {
   const [users, setUsers] = useState([] as UserListItem[])
-
-  const fetchUsers = async () => {
-    try {
-      const res = await axios.get(USERS_URL)
-      if (res.status === 200 && res.data.length > 0) {
-        setUsers(res.data)
-      }
-    } catch (error) {
-      // TODO: エラー処理
-      console.log(error)
-    }
-  }
+  const { addError } = useError()
 
   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get(USERS_URL)
+        if (res.status === 200 && res.data.length > 0) {
+          setUsers(res.data)
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          addError(
+            error,
+            error.response.statusText,
+            error.response.status
+          )
+        } else {
+          addError(error)
+        }
+      }
+    }
     fetchUsers()
-  }, [])
+  }, [addError])
 
   const titleStyle = css`
     text-align: center;
